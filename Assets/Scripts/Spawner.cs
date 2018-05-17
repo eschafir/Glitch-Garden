@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public GameObject[] attackersArray;
+    public GameObject[] attackerPrefabsArray;
 
     // Update is called once per frame
     void Update() {
-        foreach (GameObject thisAttacker in attackersArray) {
+        foreach (GameObject thisAttacker in attackerPrefabsArray) {
             if (isTimeToSpawn(thisAttacker)) {
                 Spawn(thisAttacker);
             }
