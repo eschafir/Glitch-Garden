@@ -4,5 +4,15 @@ using UnityEngine;
 
 public class Gravestone : MonoBehaviour {
 
-    // Only being used as a tag for now!
+    private Animator animator;
+
+    private void Start() {
+        animator = GetComponent<Animator>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.GetComponent<Lizard>()) {
+            animator.SetBool("isAttacked", true);
+        }
+    }
 }
