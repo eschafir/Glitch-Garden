@@ -46,4 +46,9 @@ public class Attacker : MonoBehaviour {
         currentTarget = obj;
 
     }
+
+    public void Bleed() {
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z -1f );
+        GameObject attackerBlood = Instantiate(blood, pos, Quaternion.identity, transform) as GameObject;
+    }
 }

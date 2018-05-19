@@ -8,6 +8,13 @@ public class Health : MonoBehaviour {
 
 
     public void DealDamage(float damage) {
+
+        if (GetComponent<Attacker>()) {
+            Attacker attacker = GetComponent<Attacker>();
+            attacker.Bleed();
+        }
+
+
         health -= damage;
         if (health <= 0f) {
             //Optionally trigger dead animation
@@ -18,4 +25,5 @@ public class Health : MonoBehaviour {
     public void DestroyObject() {
         Destroy(gameObject);
     }
+
 }
