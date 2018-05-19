@@ -10,9 +10,9 @@ public class Gravestone : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.GetComponent<Lizard>()) {
-            animator.SetBool("isAttacked", true);
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.GetComponent<Attacker>()) {
+            animator.SetTrigger("underAttack trigger");
         }
     }
 }

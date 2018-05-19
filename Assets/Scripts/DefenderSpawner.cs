@@ -6,8 +6,10 @@ using UnityEngine;
 public class DefenderSpawner : MonoBehaviour {
 
     private GameObject defenderParent;
+    private StarsDisplay starsDisplay;
 
     private void Start() {
+        starsDisplay = GameObject.FindObjectOfType<StarsDisplay>();
         defenderParent = GameObject.Find("Defenders");
         if (!defenderParent) {
             defenderParent = new GameObject("Defenders");
@@ -16,10 +18,20 @@ public class DefenderSpawner : MonoBehaviour {
 
     private void OnMouseDown() {
         Vector2 position = SnapToGrid(CalculateWorldPointOfMouseClick());
+
         if (ButtonBar.selectedDefender) {
-            Instantiate(ButtonBar.selectedDefender, position, Quaternion.identity,defenderParent.transform);
-            ButtonBar.UnselectDefender();
+            int defenderCost = ButtonBar.selectedDefender.GetComponent<Defender>().starCost;
+            if (starsDisplay.UseStars(defenderCost) == StarsDisplay.Status.SUCCESS) {
+                SpawnDefender(position);
+            } else {
+                Debug.Log("Insufficient stars");
+            }
         }
+    }
+
+    private void SpawnDefender(Vector2 position) {
+        Instantiate(ButtonBar.selectedDefender, position, Quaternion.identity, defenderParent.transform);
+        ButtonBar.UnselectDefender();
     }
 
     private Vector2 CalculateWorldPointOfMouseClick() {

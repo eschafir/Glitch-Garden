@@ -29,6 +29,10 @@ public class MusicManager : MonoBehaviour {
     private void OnLevelLoaded(Scene level, LoadSceneMode mode) {
         AudioClip thisLevelMusic = levelMusicArray[level.buildIndex];
 
+        if (IsLoseLevel(level)) {
+            audioSource.Stop();
+        }
+
         if (thisLevelMusic && currentAudioClipName != thisLevelMusic.name) {
             audioSource.clip = thisLevelMusic;
             audioSource.loop = true;
@@ -39,5 +43,9 @@ public class MusicManager : MonoBehaviour {
 
     public void ChangeVolume(float volume) {
         audioSource.volume = volume;
+    }
+
+    bool IsLoseLevel(Scene level) {
+        return (level.name == "03b Lose");
     }
 }

@@ -38,7 +38,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void Lose() {
-        SceneManager.LoadScene("03b Lose");
+        StartCoroutine(FadeAndLoadLevel("03b Lose"));
     }
 
     IEnumerator FadeAndLoadLevel(string name) {
