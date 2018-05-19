@@ -39,7 +39,7 @@ public class PlayerPrefsManager : MonoBehaviour {
     }
 
     public static void SetDifficulty(float diff) {
-        if (diff >= 1f && diff <= 3f) {
+        if (diff >= 1f && diff <= 8f) {
             PlayerPrefs.SetFloat(DIFFICULTY_KEY, diff);
         } else {
             Debug.LogError("Level of difficulty not permited");

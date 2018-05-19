@@ -6,6 +6,7 @@ public class Attacker : MonoBehaviour {
 
     [Tooltip("Average number of second between appearances")]
     public float seenEverySeconds;
+    public GameObject blood;
 
     private float currentSpeed;
     private GameObject currentTarget;

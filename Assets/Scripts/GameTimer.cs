@@ -25,13 +25,17 @@ public class GameTimer : MonoBehaviour {
 
         bool timeIsUp = (Time.timeSinceLevelLoad >= levelSeconds);
         if (timeIsUp && !isEndOfLevel) {
-            winLabel.SetActive(true);
-            audioSource.loop = false;
-            audioSource.volume = PlayerPrefsManager.GetMasterVolume();
-            audioSource.Play();
-            Invoke("LoadNextLevel", audioSource.clip.length);
-            isEndOfLevel = true;
+            PopWinLabel();
         }
+    }
+
+    private void PopWinLabel() {
+        winLabel.SetActive(true);
+        audioSource.loop = false;
+        audioSource.volume = PlayerPrefsManager.GetMasterVolume();
+        audioSource.Play();
+        Invoke("LoadNextLevel", audioSource.clip.length);
+        isEndOfLevel = true;
     }
 
     void LoadNextLevel() {

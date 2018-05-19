@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour {
         float meanSpawnDelay = attacker.seenEverySeconds;
         float spawnsPerSecond = 1 / meanSpawnDelay;
 
-        if(Time.deltaTime > meanSpawnDelay) {
+        if (Time.deltaTime > meanSpawnDelay) {
             Debug.LogWarning("Spawn rate capped by frame rrate");
         }
 
