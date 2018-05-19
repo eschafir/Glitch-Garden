@@ -27,6 +27,7 @@ public class GameTimer : MonoBehaviour {
         if (timeIsUp && !isEndOfLevel) {
             winLabel.SetActive(true);
             audioSource.loop = false;
+            audioSource.volume = PlayerPrefsManager.GetMasterVolume();
             audioSource.Play();
             Invoke("LoadNextLevel", audioSource.clip.length);
             isEndOfLevel = true;

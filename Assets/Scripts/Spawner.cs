@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 
     public GameObject[] attackerPrefabsArray;
+    public float delay;
 
     // Update is called once per frame
     void Update() {
@@ -25,7 +26,7 @@ public class Spawner : MonoBehaviour {
             Debug.LogWarning("Spawn rate capped by frame rrate");
         }
 
-        float threshold = spawnsPerSecond * Time.deltaTime / 7;
+        float threshold = spawnsPerSecond * Time.deltaTime / delay;
 
         return (Random.value < threshold);
     }
