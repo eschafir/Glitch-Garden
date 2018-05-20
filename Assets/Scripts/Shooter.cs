@@ -19,8 +19,6 @@ public class Shooter : MonoBehaviour {
         if (!projectileParent) {
             projectileParent = new GameObject("Projectiles");
         }
-
-
         SetMyLaneSpawner();
     }
 

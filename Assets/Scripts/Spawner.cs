@@ -7,6 +7,12 @@ public class Spawner : MonoBehaviour {
     public GameObject[] attackerPrefabsArray;
     public float delay;
 
+    private Lane thisLane;
+
+    private void Start() {
+        SetLane();
+    }
+
     // Update is called once per frame
     void Update() {
         foreach (GameObject thisAttacker in attackerPrefabsArray) {
@@ -14,6 +20,17 @@ public class Spawner : MonoBehaviour {
                 Spawn(thisAttacker);
             }
         }
+    }
+
+    void SetLane() {
+        Lane[] allLanes = GameObject.FindObjectsOfType<Lane>();
+        foreach (Lane lane in allLanes) {
+            if (lane.transform.position.y == transform.position.y) {
+                thisLane = lane;
+                return;
+            }
+        }
+        Debug.LogError(name + ": No Lane found");
     }
 
     bool isTimeToSpawn(GameObject myGameObject) {
@@ -33,5 +50,6 @@ public class Spawner : MonoBehaviour {
 
     void Spawn(GameObject myGameObject) {
         Instantiate(myGameObject, transform.position, Quaternion.identity, transform);
+        thisLane.EnemySpawned();
     }
 }
