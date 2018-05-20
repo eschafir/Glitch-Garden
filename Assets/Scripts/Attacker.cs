@@ -47,6 +47,7 @@ public class Attacker : MonoBehaviour {
 
     }
 
+    
     public void Bleed() {
         Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1f);
         Instantiate(blood, pos, Quaternion.identity, transform);

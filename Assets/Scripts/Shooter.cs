@@ -59,9 +59,6 @@ public class Shooter : MonoBehaviour {
     }
 
     private void Fire() {
-        GameObject newProjectile = Instantiate(projectile) as GameObject;
-        newProjectile.transform.parent = projectileParent.transform;
-        newProjectile.transform.position = gun.transform.position;
-
+        Instantiate(projectile, gun.transform.position, Quaternion.identity, projectileParent.transform);
     }
 }

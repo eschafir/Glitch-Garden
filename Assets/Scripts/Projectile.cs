@@ -5,10 +5,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
     public float speed, damage;
-    public AudioClip launchClip;
+
+    private AudioSource audioSource;
 
     private void Start() {
-        AudioSource.PlayClipAtPoint(launchClip, transform.position);
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = PlayerPrefsManager.GetMasterVolume() + 0.1f;
     }
 
     void Update() {

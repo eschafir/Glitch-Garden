@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour {
 
-    public float levelSeconds = 10f;
+    public float levelSeconds = 100f;
 
     private Slider slider;
     private AudioSource audioSource;
@@ -26,8 +26,10 @@ public class GameTimer : MonoBehaviour {
         bool timeIsUp = (Time.timeSinceLevelLoad >= levelSeconds);
         if (timeIsUp && !isEndOfLevel) {
             PopWinLabel();
+            StopSpawnAndKillAllEnemies();
         }
     }
+
 
     private void PopWinLabel() {
         winLabel.SetActive(true);
@@ -51,5 +53,35 @@ public class GameTimer : MonoBehaviour {
             winLabel.SetActive(false);
         }
 
+    }
+
+    void StopSpawnAndKillAllEnemies() {
+        IdleAllDefenders();
+        KillAllEnemies();
+        DisableAllSpawners();
+    }
+
+    void IdleAllDefenders() {
+        Defender[] defenders = GameObject.FindObjectsOfType<Defender>();
+
+        foreach (Defender def in defenders) {
+            if (def.gameObject.GetComponent<Animator>().GetBool("isAttacking")) {
+                def.gameObject.GetComponent<Animator>().SetBool("isAttacking", false);
+            }
+        }
+    }
+
+    void DisableAllSpawners() {
+        Spawner[] spawners = GameObject.FindObjectsOfType<Spawner>();
+        foreach (Spawner spawner in spawners) {
+            spawner.gameObject.SetActive(false);
+        }
+    }
+
+    void KillAllEnemies() {
+        Attacker[] enemies = GameObject.FindObjectsOfType<Attacker>();
+        foreach (Attacker att in enemies) {
+            Destroy(att.gameObject);
+        }
     }
 }
