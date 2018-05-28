@@ -15,9 +15,9 @@ public class Spawner : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        foreach (GameObject thisAttacker in attackerPrefabsArray) {
-            if (isTimeToSpawn(thisAttacker)) {
-                Spawn(thisAttacker);
+        foreach (GameObject attacker in attackerPrefabsArray) {
+            if (isTimeToSpawn(attacker)) {
+                Spawn(attacker);
             }
         }
     }
@@ -33,11 +33,11 @@ public class Spawner : MonoBehaviour {
         Debug.LogError(name + ": No Lane found");
     }
 
-    bool isTimeToSpawn(GameObject myGameObject) {
-        Attacker attacker = myGameObject.GetComponent<Attacker>();
+    bool isTimeToSpawn(GameObject enemy) {
+        Attacker attacker = enemy.GetComponent<Attacker>();
 
         float meanSpawnDelay = attacker.seenEverySeconds;
-        float spawnsPerSecond = 1 / meanSpawnDelay;
+        float spawnsPerSecond = 1f / meanSpawnDelay;
 
         if (Time.deltaTime > meanSpawnDelay) {
             Debug.LogWarning("Spawn rate capped by frame rrate");
